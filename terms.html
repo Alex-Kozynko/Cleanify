@@ -83,7 +83,7 @@
             </nav>
             <button class="btn_popup" onclick="$('.popup').fadeIn()">Get Quote</button>
             <div class="burger" onclick="$('.mobile-menu').addClass('open')">
-                <img src="/img/icons/menu.svg" alt="" />
+                <img src="img/icons/menu.svg" alt="" />
             </div>
         </div>
     </header>
@@ -92,7 +92,7 @@
         <div class="holder">
             <div class="logo">
                 <a href="/"><img src="img/icons/header/logo.svg" alt="logo" /></a>
-                <img src="/img/icons/menuclose.svg" alt="" class="close" onclick="$('.mobile-menu').removeClass('open')"/>
+                <img src="img/icons/menuclose.svg" alt="" class="close" onclick="$('.mobile-menu').removeClass('open')"/>
             </div>
             <nav class="nav">
                 <ul class="menu">
@@ -443,7 +443,7 @@
         <div class="footer_top">
             <div class="container">
                 <div class="item">
-                    <img src="/img/icons/header/logo.svg" alt="logo_footer" />
+                    <img src="img/icons/header/logo.svg" alt="logo_footer" />
                     <p>Our approach includes a transparent, affordable and quick
                         service that will stand the test of time. We go to great lengths
                         to ensure that your high touch surfaces are not just wiped
@@ -541,7 +541,7 @@
                 url: '/php/contact-form.php',
                 beforeSend: function(){
                     message.html(`
-                        <img src="/img/loader.svg" alt="" />
+                        <img src="img/loader.svg" alt="" />
                     `);
                 },
                 data: formNm.serialize() + '&' + $('#form2').serialize(),
