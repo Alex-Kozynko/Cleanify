@@ -70,11 +70,11 @@ $(".read_more").click(function (e) {
 });
 
 function headerPOsition() {
-    let elem = $('#header');
-    if ($("html").scrollTop() === elem.offset().top) {
-        elem.addClass("offset");
+    let elem = $('.covid');
+    if ($("html").scrollTop() > elem.outerHeight()) {
+        $('#header').addClass("offset");
     } else {
-        elem.removeClass("offset");
+        $('#header').removeClass("offset");
     }
 }
 

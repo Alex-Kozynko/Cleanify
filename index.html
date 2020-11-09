@@ -46,12 +46,12 @@
             <link rel="stylesheet" type="text/css" href="css/slick.css" />
             <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
             <link rel="stylesheet" type="text/css" href="font-awesome/font-awesome-4.7.0/css/font-awesome.min.css" />
-            <link rel="stylesheet" type="text/css" href="css/index.css" />
+            <link rel="stylesheet" type="text/css" href="css/index.css?1" />
         </head>
         <body id="body">
             <div class="covid">
                 <p>Reduce the spread of coronavirus. COVID-19 cleaning services now available. <a href="/covid.html">Learn more</a></p>
-                <button class="close"><img src="img/icons/close.svg" alt="close" onclick="document.querySelector('.covid').style.display = 'none'" /></button>
+                <!--<button class="close"><img src="img/icons/close.svg" alt="close" onclick="document.querySelector('.covid').style.display = 'none'" /></button>-->
             </div>
             <!-- Google Tag Manager (noscript) -->
             <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HQNH84"
@@ -87,8 +87,8 @@
                             </li>
                         </ul>
                     </nav>
-                    <button class="btn_popup" onclick="$('.popup').fadeIn()">Get Quote</button>
-                    <div class="burger" onclick="$('.mobile-menu').addClass('open')">
+                    <button class="btn_popup" onclick="popupFadeIn()">Get Quote</button>
+                    <div class="burger" onclick="openMenu()">
                         <img src="img/icons/menu.svg" alt="" />
                     </div>
                 </div>
@@ -98,21 +98,21 @@
                 <div class="holder">
                     <div class="logo">
                         <a href="/"><img src="img/icons/header/logo.svg" alt="logo" /></a>
-                        <img src="img/icons/menuclose.svg" alt="" class="close" onclick="$('.mobile-menu').removeClass('open')"/>
+                        <img src="img/icons/menuclose.svg" alt="" class="close" onclick="closeMenu()"/>
                     </div>
                     <nav class="nav">
                         <ul class="menu">
                             <li>
-                                <a href="/#services" onclick="$('.mobile-menu').removeClass('open')">Services</a>
+                                <a href="/#services" onclick="closeMenu()">Services</a>
                             </li>
                             <li>
-                                <a href="/#industries" onclick="$('.mobile-menu').removeClass('open')">Industries</a>
+                                <a href="/#industries" onclick="closeMenu()">Industries</a>
                             </li>
                             <li>
-                                <a href="/#process" onclick="$('.mobile-menu').removeClass('open')">Process</a>
+                                <a href="/#process" onclick="closeMenu()">Process</a>
                             </li>
                             <li>
-                                <a href="/#why-us" onclick="$('.mobile-menu').removeClass('open')">Why Us?</a>
+                                <a href="/#why-us" onclick="closeMenu()">Why Us?</a>
                             </li>
                             <li>
                                 <a href="http://blog.cleanify.com" class="link">Blog</a>
@@ -126,16 +126,24 @@
                         <a href="tel: 800-597-8687" class="phone_footer">800-597-8687</a>
                         <a href="mailto:info@cleanify.com" class="mail_footer">info@cleanify.com</a>
                     </div>
-                    <button class="button reverse" onclick="$('.popup').fadeIn(); $('.mobile-menu').removeClass('open')">Get Quote</button>
+                    <button class="button reverse" onclick="popupFadeIn(); closeMenu()">Get Quote</button>
                 </div>
             </div>
+            <script>
+                function openMenu() {
+                    $('html').addClass('openMenu')
+                }
+                function closeMenu() {
+                    $('html').removeClass('openMenu')
+                }
+            </script>
             <main id="main">
                 <div class="block_one">
                     <div class="container">
                         <h1>Cleaning You&nbsp;<span class="color">Can Trust</span></h1>
                         <p>FEEL THE TOUCH OF THE BEST CLEANING SERVICE  in NEW YORK</p>
                         <div class="wrapper">
-                            <form class="selects_wrapper" onsubmit="selectSubmit(event)" id="form2">
+                            <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <select name="Industry" onchange="selected(event.target)" required>
                                     <option value="" disabled selected>Industry</option>
                                     <option value="Corporate Offices">Corporate Offices</option>
@@ -174,7 +182,14 @@
                     </div>
                 </div>
                 <div id="services" class="block_two">
+                    
+                <picture>
+                    <source srcset="img/mobi/webp/main/people.webp"  type="image/webp" media="(max-width: 1023px)">
+                    <source srcset="img/mobi/main/people.png"  type="image/png" media="(max-width: 1023px)">
+                    <source srcset="img/webp/main/people.webp"  type="image/webp">
                     <img class="img_banner" src="img/main/people.png" alt="people.img" />
+                </picture>
+            
                     <div class="banner_block">
 
 
@@ -320,7 +335,7 @@
                         <div class="center">
                             <h2 class="dekstop_title">Industries</h2>
                             <!--<p class="dekstop_title">There are a few of the industries we serve</p>-->
-                            <a href="javascript: void(0)" onclick="$('.popup').fadeIn()" class="button">Get Quote</a>
+                            <a href="javascript: void(0)" onclick="popupFadeIn()" class="button">Get Quote</a>
                         </div>
                         <div class="columns col_r">
                             <div class="item wow fadeInRight">
@@ -393,7 +408,7 @@
                                 Thorough disinfecting properly sanitizes your <span class="hide_bg"></span><span class="more">space by eradicating remaining
                                 bacteria or viruses. By using antimicrobial coating technology, we create a
                                 barrier which kills new bacteria upon contact for several months before needing
-                                    to be reinforced</span></p>
+                                    to be reinforced.</span></p>
                             <button class="read_more">
                                 <span class="read">Read More</span>
                                 <span class="more">Hide</span>
@@ -410,7 +425,7 @@
                                     solution helps cleanse your
                                     space and expose any
                                     potentially dangerous
-                                    pathogens</p>
+                                    pathogens.</p>
                             </div>
                             <div class="item_icon wow fadeIn" data-wow-delay="100ms">
                                 <div class="icon">
@@ -421,7 +436,7 @@
                                     properly cleaned, our trained
                                     technicians apply a
                                     hospital-grade disinfectant
-                                    Hypochlorous acid</p>
+                                    Hypochlorous acid.</p>
                             </div>
                             <div class="item_icon wow fadeIn" data-wow-delay="200ms">
                                 <div class="icon">
@@ -432,7 +447,7 @@
                                     technological solution that
                                     reinforces surfaces against
                                     harmful germs which will
-                                    remain long after we’re gone</p>
+                                    remain long after we’re gone.</p>
                             </div>
                         </div>
                     </div>
@@ -464,12 +479,12 @@
                                 cleaning services when you need them most. Cleanify’s
                                 customer-centric approach towards germ mitigation will help
                                 you deliver a pristine & healthy environment for all people who
-                                    interact with your facility</span></p>
+                                    interact with your facility.</span></p>
                             <button class="read_more">
                                 <span class="read">Read More</span>
                                 <span class="more">Hide</span>
                             </button>
-                            <a href="javascript: void(0)" onclick="$('.popup').fadeIn()" class="button reverse">Get Quote</a>
+                            <a href="javascript: void(0)" onclick="popupFadeIn()" class="button reverse">Get Quote</a>
                         </div>
                     </div>
                 </div>
@@ -505,7 +520,7 @@
                         <h2 class="mob_title">Get your free cleaning quote today!</h2>
                         <p>Just fill out the form and we will contact you in a few minutes</p>
                         <div class="wrapper">
-                            <form class="selects_wrapper" onsubmit="selectSubmit(event)" id="form2">
+                            <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <select name="Industry" onchange="selected(event.target)" required>
                                     <option value="" disabled selected>Industry</option>
                                     <option value="Corporate Offices">Corporate Offices</option>
@@ -549,7 +564,7 @@
                 <div class="footer_top">
                     <div class="container">
                         <div class="item">
-                            <img src="img/icons/header/logo.svg" alt="logo_footer" />
+                            <a href="https://cleanify.com/"><img src="img/icons/header/logo.svg" alt="logo_footer" /></a>
                             <p>Our approach includes a transparent, affordable and quick
                                 service that will stand the test of time. We go to great lengths
                                 to ensure that your high touch surfaces are not just wiped
@@ -570,7 +585,7 @@
                                         <a href="/#process">Process</a>
                                     </li>
                                     <li>
-                                        <a href="http://blog.cleanify.com">Blog</a>
+                                        <a href="http://blog.cleanify.com" class="link">Blog</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -606,28 +621,36 @@
                         <a href="https://ursadigital.com/" target="_blank" class="wrap">
                             <p>Designed and
                                 maintained by</p>
-                            <img src="../img/icons/footer/sub_logo.svg" alt="sub_logo" />
+                            <img src="img/icons/footer/sub_logo.svg" alt="sub_logo" />
                         </a>
                     </div>
                 </div>
             </footer>
-            <div class="popup" style="display: none;">
-            <form id="form">
-                <img src="img/icons/close.svg" alt="" class="close" onclick="$('.popup').removeClass('select').fadeOut()"/>
-                <p class="title">Get Quote</p>
-                <input required type="text" name="name" placeholder="Name">
-                <input required type="tel" name="phone" placeholder="Phone">
-                <input required type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                <input required type="text" name="code" placeholder="ZIP Code">
-                <button type="submit" id="submit">Get Quote</button>
-                <label>
-                    <input required type="checkbox" name="agree">
-                    <p>I agree with &nbsp;<a href="/policy.html" target="_blank">Privacy Policy </a>&nbsp;&&nbsp;<a href="/terms.html" target="_blank"> Terms&nbsp;of&nbsp;Services</a></p>
-                </label>
-            </form>
+            <div class="popup">
+                <form id="form">
+                    <img src="img/icons/close.svg" alt="" class="close" onclick="popupFadeOut()"/>
+                    <p class="title">Get Quote</p>
+                    <input required type="text" name="name" placeholder="Name" id="name">
+                    <input required type="tel" name="phone" placeholder="Phone" id="phone">
+                    <input required type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email">
+                    <input required type="text" name="code" placeholder="ZIP Code" id="code">
+                    <button type="submit" id="submit">Get Quote</button>
+                    <label>
+                        <input required type="checkbox" name="agree">
+                        <p>I agree with &nbsp;<a href="/policy.html" target="_blank">Privacy Policy </a>&nbsp;&&nbsp;<a href="/terms.html" target="_blank"> Terms&nbsp;of&nbsp;Services</a></p>
+                    </label>
+                </form>
             </div>
             <script src="js/libs.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             <script type="text/javascript">
+            function popupFadeOut() {
+                $('.popup').removeClass('select')
+                $('html').removeClass('openPopup')
+            }
+            function popupFadeIn() {
+                $('html').addClass('openPopup')
+            }
                 $(document).ready(function () {
                  $("input[name='phone']").mask("999-999-9999").click(function () {
                      $(this).focus();
@@ -641,7 +664,6 @@
                     var formID = $(this).attr('id');
                     var formNm = $('#' + formID);
                     var message = $(formNm).find("#submit");
-                    console.log($('#form2').serialize());
                     $.ajax({
                         type: "POST",
                         url: '/php/contact-form.php',
@@ -650,9 +672,42 @@
                                 <img src="img/loader.svg" alt="" />
                             `);
                         },
-                        data: formNm.serialize() + '&' + $('#form2').serialize(),
+                        data: formNm.serialize() + '&' + $('.form2').serialize(),
                         success: function(data) {
-                            window.location.href = '/thanks.html';
+                            axios({
+                                method: 'post',
+                                url: `https://api.pipedrive.com/v1/persons?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
+                                data: {
+                                    name: document.querySelector('#name').value,
+                                    email: [
+                                        {
+                                            "label": "work",
+                                            "value": document.querySelector('#email').value,
+                                            "primary": true
+                                        }
+                                    ],
+                                    phone: [
+                                        {
+                                            "label": "work",
+                                            "value": document.querySelector('#phone').value,
+                                            "primary": true
+                                        }
+                                    ],
+                                }
+                            }).then((response) => {
+                                axios({
+                                    method: 'post',
+                                    url: `https://api.pipedrive.com/v1/leads?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
+                                    data: {
+                                        title: 'WebSite lead',
+                                        label_ids: ["b10b29c0-0ef4-11eb-b460-59fcc13dc5a3"],
+                                        person_id: response.data.data.id,
+                                        note: 'Zip code: ' + document.querySelector('#code').value
+                                    }
+                                }).then(() => {
+                                    window.location.href = '/thanks.html';
+                                })
+                            })
                         },
                         error: function(jqXHR, text, error) {
                             message.text("Send error");
@@ -707,7 +762,7 @@
                 }
                 function selectSubmit(e) {
                     e.preventDefault()
-                    $('.popup').fadeIn()
+                    popupFadeIn()
                 }
             </script>
         </body>

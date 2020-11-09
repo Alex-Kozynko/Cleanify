@@ -12,7 +12,7 @@ $quantityBathroom        = htmlspecialchars($_POST["quantityBathroom"]);
 $typeCleaning        = htmlspecialchars($_POST["typeCleaning"]);
 
 /* Ваш адрес и тема сообщения */
-$address = "Info@cleanify.com, Cleanify@ursadigital.com, boyozucker@gmail.com";
+$address = "Info@cleanify.com, Cleanify@ursadigital.com, Cleanify20@gmail.com, boyozucker@gmail.com, webenvir.mail@gmail.com";
 $sub = "Get Quote";
 
 /* Формат письма */
@@ -57,7 +57,7 @@ $mes = "
 </table>
 ";
 
- $headers = "From: " . $email . "\r\n";
+ $headers = "From: " . "postmaster@cleanify.com" . "\r\n";
  $headers .= "Reply-To: ". $email . "\r\n";
  $headers .= "MIME-Version: 1.0\r\n";
  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
