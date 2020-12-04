@@ -12,6 +12,21 @@
             })(window,document,'script','dataLayer','GTM-5HQNH84');</script>
             <!-- End Google Tag Manager -->
             
+            <script data-cfasync="false" type="text/javascript" src="https://tracker.gaconnector.com/gaconnector.js"></script>
+            <script>
+            var gaFields, analytics = '';
+            function setGaconnectorHiddenFields() {
+                gaFields = gaconnector.getCookieValues();
+                analytics = ''
+                for (var fieldName in gaFields) {
+                    analytics += fieldName + ': ' + gaFields[fieldName] + `<br>`
+                }
+            }
+            
+            gaconnector.setCallback(setGaconnectorHiddenFields);
+            setInterval(setGaconnectorHiddenFields, 1000);
+            </script>
+            
             <!-- Facebook Pixel Code -->
             <script>
                 !function(f,b,e,v,n,t,s)
@@ -46,7 +61,7 @@
             <link rel="stylesheet" type="text/css" href="css/slick.css" />
             <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
             <link rel="stylesheet" type="text/css" href="font-awesome/font-awesome-4.7.0/css/font-awesome.min.css" />
-            <link rel="stylesheet" type="text/css" href="css/index.css?1" />
+            <link rel="stylesheet" type="text/css" href="css/index.css?2" />
         </head>
         <body id="body">
             <div class="covid">
@@ -141,8 +156,8 @@
                 <div class="block_one">
                     <div class="container">
                         <h1>Cleaning You&nbsp;<span class="color">Can Trust</span></h1>
-                        <p>FEEL THE TOUCH OF THE BEST CLEANING SERVICE  in NEW YORK</p>
-                        <div class="wrapper">
+                        <p>FEEL THE TOUCH OF THE BEST CLEANING SERVICE  IN NEW YORK</p>
+                        <div class="wrapper" id="app">
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <select name="Industry" onchange="selected(event.target)" required>
                                     <option value="" disabled selected>Industry</option>
@@ -155,7 +170,7 @@
                                     <option value="Retail Storefronts">Retail Storefronts</option>
                                     <option value="Hospitality">Hospitality</option>
                                 </select>
-                                <input type="text" name="m2" placeholder="Sq.ft." class="m2" maxlength="5" required>
+                                <input type="text" name="m2" placeholder="Sq.ft." class="m2" maxlength="6" required>
                                 <select class="quantityBedroom" name="quantityBedroom" required disabled>
                                     <option value="" disabled selected>Bedroom</option>
                                     <option value="Studio">Studio</option>
@@ -519,7 +534,7 @@
                         <h2 class="dekstop_title">Book your clean today!</h2>
                         <h2 class="mob_title">Get your free cleaning quote today!</h2>
                         <p>Just fill out the form and we will contact you in a few minutes</p>
-                        <div class="wrapper">
+                        <div class="wrapper" id="app">
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <select name="Industry" onchange="selected(event.target)" required>
                                     <option value="" disabled selected>Industry</option>
@@ -532,7 +547,7 @@
                                     <option value="Retail Storefronts">Retail Storefronts</option>
                                     <option value="Hospitality">Hospitality</option>
                                 </select>
-                                <input type="text" name="m2" placeholder="Sq.ft." class="m2" maxlength="5" required>
+                                <input type="text" name="m2" placeholder="Sq.ft." class="m2" maxlength="6" required>
                                 <select class="quantityBedroom" name="quantityBedroom" required disabled>
                                     <option value="" disabled selected>Bedroom</option>
                                     <option value="Studio">Studio</option>
@@ -664,16 +679,44 @@
                     var formID = $(this).attr('id');
                     var formNm = $('#' + formID);
                     var message = $(formNm).find("#submit");
-                    $.ajax({
-                        type: "POST",
-                        url: '/php/contact-form.php',
-                        beforeSend: function(){
-                            message.html(`
-                                <img src="img/loader.svg" alt="" />
-                            `);
-                        },
-                        data: formNm.serialize() + '&' + $('.form2').serialize(),
-                        success: function(data) {
+                    message.html(`
+                        <img src="img/loader.svg" alt="" />
+                    `);
+                    let createDeal = personId => {
+                        axios({
+                            method: 'post',
+                            url: `https://api.pipedrive.com/v1/deals?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
+                            data: {
+                                title: document.querySelector('#name').value + ' deal',
+                                person_id: personId,
+                                '51aacc7a9d887dfc5017ca542d1dc32dbf834b3d': gaFields['lc_campaign'],
+                                'b6c7589778b5cda088b8b1ba41533bd60ad22d89': gaFields['lc_content'],
+                                '53bad27fb38483b04222d330bee658a55dc68d0f': gaFields['lc_source'],
+                                '1ecb3097dbada46ea898df68bf22db59905bc399': gaFields['lc_term'],
+                                '33b4645d2ffaba99cb373eeb16c5b70188dc6b89': gaFields['lc_medium'],
+                                '983dbe070bd020d0499c4f151c6f1271122de6c2': gaFields['GA_Client_ID'],
+                            }
+                        }).then(() => {
+                            $.ajax({
+                                type: "POST",
+                                url: '/php/contact-form.php',
+                                data: formNm.serialize() + '&' + $('.form2').serialize(),
+                                success: function(data) {
+                                    window.location.href = '/thanks.html';
+                                },
+                                error: function(jqXHR, text, error) {
+                                    message.text("Send error");
+                                }
+                            });
+                        })
+                    }
+                    axios({
+                        method: 'get',
+                        url: `https://api.pipedrive.com/v1/persons/search?term=${document.querySelector('#email').value}&api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`
+                    }).then(responce => {
+                        if (responce.data.data.items.length) {
+                            createDeal(responce.data.data.items[0].item.id)
+                        } else {
                             axios({
                                 method: 'post',
                                 url: `https://api.pipedrive.com/v1/persons?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
@@ -693,31 +736,19 @@
                                             "primary": true
                                         }
                                     ],
+                                    '5cfdb939fa32544d421f10c4fe3baf6b7de34bb9': document.querySelector('#code').value
                                 }
                             }).then((response) => {
-                                axios({
-                                    method: 'post',
-                                    url: `https://api.pipedrive.com/v1/leads?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
-                                    data: {
-                                        title: 'WebSite lead',
-                                        label_ids: ["b10b29c0-0ef4-11eb-b460-59fcc13dc5a3"],
-                                        person_id: response.data.data.id,
-                                        note: 'Zip code: ' + document.querySelector('#code').value
-                                    }
-                                }).then(() => {
-                                    window.location.href = '/thanks.html';
-                                })
+                                createDeal(response.data.data.id)
                             })
-                        },
-                        error: function(jqXHR, text, error) {
-                            message.text("Send error");
                         }
-                    });
+                    })
                     return false;
                 });
             })
             </script>
             <script src="js/main.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
             <script type="text/javascript">
                 (function($) {
                     $(function() {
@@ -736,16 +767,17 @@
                         });
                     })
                     $('.m2').on('input', function() {
-                        if ($(this).val() === 'SF') {
+                        $(this).val($(this).val().replace(/(?![0-9]).*/, ''))
+                        /*if ($(this).val() === 'SF') {
                             $(this).val('')
                         } else {
-                            $(this).val($(this).val().replace(/(?![0-9]).*/, ''))
+                            $(this).val($(this).val().replace(/(?![0-9]).*!/, ''))
                             $(this).val($(this).val() + 'SF')
                             $(this).get(0).setSelectionRange($(this).val().length - 2,$(this).val().length - 2);
                             if ($(this).val() === 'SF') {
                                 $(this).val('')
                             }
-                        }
+                        }*/
                     });
                 })(jQuery);
                 function selected(e) {

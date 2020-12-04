@@ -12,6 +12,21 @@
             })(window,document,'script','dataLayer','GTM-5HQNH84');</script>
             <!-- End Google Tag Manager -->
             
+            <script data-cfasync="false" type="text/javascript" src="https://tracker.gaconnector.com/gaconnector.js"></script>
+            <script>
+            var gaFields, analytics = '';
+            function setGaconnectorHiddenFields() {
+                gaFields = gaconnector.getCookieValues();
+                analytics = ''
+                for (var fieldName in gaFields) {
+                    analytics += fieldName + ': ' + gaFields[fieldName] + `<br>`
+                }
+            }
+            
+            gaconnector.setCallback(setGaconnectorHiddenFields);
+            setInterval(setGaconnectorHiddenFields, 1000);
+            </script>
+            
             <!-- Facebook Pixel Code -->
             <script>
                 !function(f,b,e,v,n,t,s)

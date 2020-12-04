@@ -227,16 +227,44 @@
             var formID = $(this).attr('id');
             var formNm = $('#' + formID);
             var message = $(formNm).find("#submit");
-            $.ajax({
-                type: "POST",
-                url: '/php/contact-form.php',
-                beforeSend: function(){
-                    message.html(`
-                        <img src="img/loader.svg" alt="" />
-                    `);
-                },
-                data: formNm.serialize() + '&' + $('.form2').serialize(),
-                success: function(data) {
+            message.html(`
+                <img src="img/loader.svg" alt="" />
+            `);
+            let createDeal = personId => {
+                axios({
+                    method: 'post',
+                    url: `https://api.pipedrive.com/v1/deals?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
+                    data: {
+                        title: document.querySelector('#name').value + ' deal',
+                        person_id: personId,
+                        '51aacc7a9d887dfc5017ca542d1dc32dbf834b3d': gaFields['lc_campaign'],
+                        'b6c7589778b5cda088b8b1ba41533bd60ad22d89': gaFields['lc_content'],
+                        '53bad27fb38483b04222d330bee658a55dc68d0f': gaFields['lc_source'],
+                        '1ecb3097dbada46ea898df68bf22db59905bc399': gaFields['lc_term'],
+                        '33b4645d2ffaba99cb373eeb16c5b70188dc6b89': gaFields['lc_medium'],
+                        '983dbe070bd020d0499c4f151c6f1271122de6c2': gaFields['GA_Client_ID'],
+                    }
+                }).then(() => {
+                    $.ajax({
+                        type: "POST",
+                        url: '/php/contact-form.php',
+                        data: formNm.serialize() + '&' + $('.form2').serialize(),
+                        success: function(data) {
+                            window.location.href = '/thanks.html';
+                        },
+                        error: function(jqXHR, text, error) {
+                            message.text("Send error");
+                        }
+                    });
+                })
+            }
+            axios({
+                method: 'get',
+                url: `https://api.pipedrive.com/v1/persons/search?term=${document.querySelector('#email').value}&api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`
+            }).then(responce => {
+                if (responce.data.data.items.length) {
+                    createDeal(responce.data.data.items[0].item.id)
+                } else {
                     axios({
                         method: 'post',
                         url: `https://api.pipedrive.com/v1/persons?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
@@ -256,26 +284,13 @@
                                     "primary": true
                                 }
                             ],
+                            '5cfdb939fa32544d421f10c4fe3baf6b7de34bb9': document.querySelector('#code').value
                         }
                     }).then((response) => {
-                        axios({
-                            method: 'post',
-                            url: `https://api.pipedrive.com/v1/leads?api_token=8ca7e679355e95427a2f8bb05c1dbabc0c49974d`,
-                            data: {
-                                title: 'WebSite lead',
-                                label_ids: ["b10b29c0-0ef4-11eb-b460-59fcc13dc5a3"],
-                                person_id: response.data.data.id,
-                                note: 'Zip code: ' + document.querySelector('#code').value
-                            }
-                        }).then(() => {
-                            window.location.href = '/thanks.html';
-                        })
+                        createDeal(response.data.data.id)
                     })
-                },
-                error: function(jqXHR, text, error) {
-                    message.text("Send error");
                 }
-            });
+            })
             return false;
         });
     })
