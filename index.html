@@ -159,27 +159,49 @@
                         <p>FEEL THE TOUCH OF THE BEST CLEANING SERVICE  IN NEW YORK</p>
                         <div class="wrapper" id="app">
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
-                                <select name="Industry" onchange="selected(event.target)" required>
-                                    <option value="" disabled selected>Industry</option>
-                                    <option value="Corporate Offices">Corporate Offices</option>
-                                    <option value="Residential Cleaning ">Residential Facilities</option>
-                                    <option value="Religious Facility">Religious Facility</option>
-                                    <option value="Fitness Locations">Fitness Locations</option>
-                                    <option value="Educational Facilities">Educational Facilities</option>
-                                    <option value="Medical Facilities">Medical Facilities</option>
-                                    <option value="Retail Storefronts">Retail Storefronts</option>
-                                    <option value="Hospitality">Hospitality</option>
-                                </select>
-                                <input type="text" name="m2" placeholder="Sq.ft." class="m2" maxlength="6" required>
-                                <select class="quantityBedroom" name="quantityBedroom" required disabled>
-                                    <option value="" disabled selected>Bedroom</option>
-                                    <option value="Studio">Studio</option>
-                                    <option value="1 Bedroom">1 Bedroom</option>
-                                    <option value="2 Bedrooms">2 Bedrooms</option>
-                                    <option value="3 Bedrooms">3 Bedrooms</option>
-                                    <option value="4 and Up Bedrooms">4 and Up Bedrooms</option>
-                                </select>
-                                <select name="quantityBathroom" required>
+                                <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    id="email"
+                                    v-model="state.dataToSend.email"
+                                    @change="setCache()"
+                                >
+                                <input
+                                    required
+                                    type="text"
+                                    name="code"
+                                    placeholder="ZIP Code"
+                                    id="code"
+                                    v-model="state.dataToSend.zip"
+                                    @change="setCache()"
+                                    maxlength="6"
+                                >
+                                <div class="selects-holder">
+                                    <v-select
+                                        class="item"
+                                        label="abridgment"
+                                        label-option="text"
+                                        v-for="(select, i) in state.selects.premises"
+                                        :key="i"
+                                        :options="select.items"
+                                        v-model="state.dataToSend.selected.premises[select.name]"
+                                        v-if="state.dataToSend.selected.premises[select.name]"
+                                    ></v-select>
+                                </div>
+                                <div class="selects-holder">
+                                    <div class="item v-select datepicker"><p data-toggle="datepicker"></p><img src="/img/arrowDown.svg" alt="" /></div>
+                                    <v-select
+                                        class="item time"
+                                        label="text"
+                                        label-option="text"
+                                        :options="state.times"
+                                        v-model="state.dataToSend.date.time"
+                                    ></v-select>
+                                </div>
+                        <!--        <select required>
                                     <option value="" disabled selected>Bathroom</option>
                                     <option value="1 Bathroom">1 Bathroom</option>
                                     <option value="2 Bathrooms">2 Bathrooms</option>
@@ -190,7 +212,7 @@
                                     <option value="" disabled selected>Type</option>
                                     <option value="Standard">Standard</option>
                                     <option value="Deep Cleaning">Deep Clean</option>
-                                </select>
+                                </select>-->
                                 <button type="submit" class="button">Get Quote</button>
                             </form>
                         </div>
@@ -536,27 +558,49 @@
                         <p>Just fill out the form and we will contact you in a few minutes</p>
                         <div class="wrapper" id="app">
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
-                                <select name="Industry" onchange="selected(event.target)" required>
-                                    <option value="" disabled selected>Industry</option>
-                                    <option value="Corporate Offices">Corporate Offices</option>
-                                    <option value="Residential Cleaning ">Residential Facilities</option>
-                                    <option value="Religious Facility">Religious Facility</option>
-                                    <option value="Fitness Locations">Fitness Locations</option>
-                                    <option value="Educational Facilities">Educational Facilities</option>
-                                    <option value="Medical Facilities">Medical Facilities</option>
-                                    <option value="Retail Storefronts">Retail Storefronts</option>
-                                    <option value="Hospitality">Hospitality</option>
-                                </select>
-                                <input type="text" name="m2" placeholder="Sq.ft." class="m2" maxlength="6" required>
-                                <select class="quantityBedroom" name="quantityBedroom" required disabled>
-                                    <option value="" disabled selected>Bedroom</option>
-                                    <option value="Studio">Studio</option>
-                                    <option value="1 Bedroom">1 Bedroom</option>
-                                    <option value="2 Bedrooms">2 Bedrooms</option>
-                                    <option value="3 Bedrooms">3 Bedrooms</option>
-                                    <option value="4 and Up Bedrooms">4 and Up Bedrooms</option>
-                                </select>
-                                <select name="quantityBathroom" required>
+                                <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    id="email"
+                                    v-model="state.dataToSend.email"
+                                    @change="setCache()"
+                                >
+                                <input
+                                    required
+                                    type="text"
+                                    name="code"
+                                    placeholder="ZIP Code"
+                                    id="code"
+                                    v-model="state.dataToSend.zip"
+                                    @change="setCache()"
+                                    maxlength="6"
+                                >
+                                <div class="selects-holder">
+                                    <v-select
+                                        class="item"
+                                        label="abridgment"
+                                        label-option="text"
+                                        v-for="(select, i) in state.selects.premises"
+                                        :key="i"
+                                        :options="select.items"
+                                        v-model="state.dataToSend.selected.premises[select.name]"
+                                        v-if="state.dataToSend.selected.premises[select.name]"
+                                    ></v-select>
+                                </div>
+                                <div class="selects-holder">
+                                    <div class="item v-select datepicker"><p data-toggle="datepicker"></p><img src="/img/arrowDown.svg" alt="" /></div>
+                                    <v-select
+                                        class="item time"
+                                        label="text"
+                                        label-option="text"
+                                        :options="state.times"
+                                        v-model="state.dataToSend.date.time"
+                                    ></v-select>
+                                </div>
+                        <!--        <select required>
                                     <option value="" disabled selected>Bathroom</option>
                                     <option value="1 Bathroom">1 Bathroom</option>
                                     <option value="2 Bathrooms">2 Bathrooms</option>
@@ -567,7 +611,7 @@
                                     <option value="" disabled selected>Type</option>
                                     <option value="Standard">Standard</option>
                                     <option value="Deep Cleaning">Deep Clean</option>
-                                </select>
+                                </select>-->
                                 <button type="submit" class="button">Get Quote</button>
                             </form>
                         </div>
@@ -671,7 +715,7 @@
                      $(this).focus();
                      $(this).get(0).setSelectionRange(0,0);
                  });
-                $("input[name='code']").mask("99999").click(function () {
+                $(".popup input[name='code']").mask("99999").click(function () {
                     $(this).focus();
                     $(this).get(0).setSelectionRange(0,0);
                 });
@@ -748,13 +792,182 @@
             })
             </script>
             <script src="js/main.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<!--            <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+            <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
             <script type="text/javascript">
+                Vue.directive('click-outside', {
+                    bind: function (el, binding, vnode) {
+                        el.clickOutsideEvent = function (event) {
+                            // here I check that click was outside the el and his children
+                            if (!(el == event.target || el.contains(event.target))) {
+                                // and if it did, call method provided in attribute value
+                                vnode.context[binding.expression](event);
+                            }
+                        };
+                        document.body.addEventListener('click', el.clickOutsideEvent)
+                    },
+                    unbind: function (el) {
+                        document.body.removeEventListener('click', el.clickOutsideEvent)
+                    },
+                });
+                Vue.component('v-select', {
+                    data: function () {
+                        return {
+                            visible: false
+                        }
+                    },
+                    props: {
+                        options: {
+                            type: Array,
+                            required: true
+                        },
+                        labelOption: {
+                            type: String,
+                            default: 'text'
+                        },
+                        label: {
+                            type: String,
+                            default: 'text'
+                        },
+                        value: {
+                            type: Object
+                        },
+                    },
+                    methods: {
+                        clickOutside() {
+                            this.visible = false
+                        },
+                        selected(option, i) {
+                            option.index = i
+                            this.$emit('input', option)
+                            localStorage.setItem('state', JSON.stringify(app.$data.state))
+                        },
+                    },
+                    template: `
+                        <div class="v-select" :class="{open: visible}" @click="visible = !visible" v-click-outside="clickOutside">
+                        <div class="text">
+                            <div class="title">
+                                <p>{{ value[label] }}</p>
+                                <span v-if="value.duration">~ {{ +value.duration + details }} hour</span>
+<!--                                <span v-if="+value.sale">save$ {{ value.sale }}.00</span>-->
+                            </div>
+                            <img src="/img/arrowDown.svg" alt="" />
+                        </div>
+                        <div class="v-list-dropdown">
+                            <ul ref="select">
+                                <li
+                                    v-for="(option, i) in options"
+                                    @click="selected(option, i)"
+                                    :class="{active: value[labelOption] === option[labelOption]}"
+                                >
+                                    {{ option[labelOption] }}
+                                    <span v-if="option.duration">~ {{ +option.duration + details }} hour</span>
+                                    <span v-if="+option.sale">save \${{option.sale}}.00</span>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                    `
+                })
+                var app = new Vue({
+                    el: '#app',
+                    data: {
+                        state: {
+                            addons: [],
+                            pets: [],
+                            date: [],
+                            times: [],
+                            entrances: [],
+                            frequents: [],
+                            location: {},
+                            selects: {},
+                            dataToSend: {
+                                selected: {
+                                    industry: {},
+                                    typecleaning: {},
+                                    premises: {}
+                                },
+                                addons: [],
+                                pet: {item: 'No pets'},
+                                entrance: {item: 'How do we get in ?'},
+                                frequent: {text: 'One time', sale: 0},
+                                date: {
+                                    day: moment().add(1, 'days').format('DD'),
+                                    month: moment().add(1, 'days').format('MM'),
+                                    year: moment().add(1, 'days').format('YYYY'),
+                                    time: {
+                                        text: "Please select time",
+                                        sale: 0,
+                                        hidden: true
+                                    }
+                                },
+                                address: '',
+                                zip: '',
+                                message: '',
+                                sf: 123,
+                                email: ''
+                            }
+                        }
+                    },
+                    methods: {
+                        setCache() {
+                            console.log(1);
+                            localStorage.setItem('state', JSON.stringify(this.state))
+                        }
+                    },
+                    created() {
+                        if (localStorage.getItem('state')) {
+                            this.state = JSON.parse(localStorage.getItem('state'))
+                        }
+                        axios({
+                            method: 'get',
+                            url: 'https://test2.niklex.net/wp-json/api/v1/data'
+                        })
+                        .then((response) => {
+                            if (response.data['extra-addons']) {
+                                this.state.addons = response.data['extra-addons']
+                                this.state.pets = response.data['extra-pets']
+                                this.state.date = response.data['booking-date']
+                                this.state.times = response.data['booking-time']
+                                this.state.entrances = response.data['entrance']
+                                this.state.frequents = response.data['frequent']
+                                this.state.location = response.data['location']
+                                this.state.selects = response.data['stepone']
+                                if (!localStorage.getItem('state')) {
+                                    this.state.dataToSend.selected.industry = this.state.selects.industry[0]
+                                    this.state.dataToSend.selected.typecleaning = this.state.selects.typecleaning[0]
+                                    this.state.dataToSend.date.time = this.state.times[1]
+                                    this.state.selects.premises.forEach((item, i) => {
+                                        item.items[0].index = 0
+                                        Vue.set(this.state.dataToSend.selected.premises, item.name, item.items[0])
+                                    })
+                                    localStorage.setItem('state', JSON.stringify(this.state))
+                                }
+                            }
+                        })
+                        .catch((error) => console.error(error))
+                    },
+                    updated: function () {
+                        console.log(this.state.dataToSend.selected.premises);
+                        $('select').styler();
+                    }
+                });
                 (function($) {
                     $(function() {
                         $('input[type="checkbox"], select').styler();
                     });
                     $(document).ready(function () {
+                        $('[data-toggle="datepicker"]').datepicker({
+                            format: 'mm-dd-yy',
+                            date: new Date(),
+                            autoPick: true,
+                            startDate: new Date(),
+                            endDate: moment().add(6, 'month')
+                        }).on('pick.datepicker', function (e) {
+                            app.$data.state.dataToSend.date.day = moment(e).format('DD')
+                            app.$data.state.dataToSend.date.month = moment(e).format('MM')
+                            app.$data.state.dataToSend.date.year = moment(e).format('YYYY')
+                        });;
                        /* $("input[name='phone']").mask("9").click(function () {
                             $(this).focus();
                             $(this).get(0).setSelectionRange(0,0);
@@ -766,7 +979,7 @@
                             $('body,html').animate({scrollTop: top}, 1000); //сделаем прокрутку за 1 с
                         });
                     })
-                    $('.m2').on('input', function() {
+                    $('.m2, .selects_wrapper #code').on('input', function() {
                         $(this).val($(this).val().replace(/(?![0-9]).*/, ''))
                         /*if ($(this).val() === 'SF') {
                             $(this).val('')
@@ -794,7 +1007,11 @@
                 }
                 function selectSubmit(e) {
                     e.preventDefault()
-                    popupFadeIn()
+                    document.location.href = "/calc/";
+                }
+                function setCache(e) {
+                    console.log(e);
+                    localStorage.setItem('state', JSON.stringify(this.state))
                 }
             </script>
         </body>
