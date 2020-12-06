@@ -157,7 +157,7 @@
                     <div class="container">
                         <h1>Cleaning You&nbsp;<span class="color">Can Trust</span></h1>
                         <p>FEEL THE TOUCH OF THE BEST CLEANING SERVICE  IN NEW YORK</p>
-                        <div class="wrapper" id="app">
+                        <div class="wrapper">
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <input
                                     required
@@ -556,7 +556,7 @@
                         <h2 class="dekstop_title">Book your clean today!</h2>
                         <h2 class="mob_title">Get your free cleaning quote today!</h2>
                         <p>Just fill out the form and we will contact you in a few minutes</p>
-                        <div class="wrapper" id="app">
+                        <div class="wrapper">
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <input
                                     required
@@ -792,8 +792,7 @@
             })
             </script>
             <script src="js/main.js"></script>
-<!--            <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
-            <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
             <script type="text/javascript">
                 Vue.directive('click-outside', {
                     bind: function (el, binding, vnode) {
@@ -870,7 +869,7 @@
                     `
                 })
                 var app = new Vue({
-                    el: '#app',
+                    el: '#main',
                     data: {
                         state: {
                             addons: [],
@@ -964,10 +963,11 @@
                             startDate: new Date(),
                             endDate: moment().add(6, 'month')
                         }).on('pick.datepicker', function (e) {
-                            app.$data.state.dataToSend.date.day = moment(e).format('DD')
-                            app.$data.state.dataToSend.date.month = moment(e).format('MM')
-                            app.$data.state.dataToSend.date.year = moment(e).format('YYYY')
-                        });;
+                            app.$data.state.dataToSend.date.day = moment(e.date).format('DD')
+                            app.$data.state.dataToSend.date.month = moment(e.date).format('MM')
+                            app.$data.state.dataToSend.date.year = moment(e.date).format('YYYY')
+                            app.setCache()
+                        });
                        /* $("input[name='phone']").mask("9").click(function () {
                             $(this).focus();
                             $(this).get(0).setSelectionRange(0,0);
