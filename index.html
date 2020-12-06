@@ -972,9 +972,9 @@
                     $(document).ready(function () {
                         $('[data-toggle="datepicker"]').datepicker({
                             format: 'mm-dd-yy',
-                            date: new Date(),
+                            date: moment().add(2, 'days'),
                             autoPick: true,
-                            startDate: new Date(),
+                            startDate: moment().add(2, 'days'),
                             endDate: moment().add(6, 'month')
                         }).on('pick.datepicker', function (e) {
                             app.$data.state.dataToSend.date.day = moment(e.date).format('DD')
