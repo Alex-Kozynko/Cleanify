@@ -161,16 +161,6 @@
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <input
                                     required
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                    id="email"
-                                    v-model="state.dataToSend.email"
-                                    @change="setCache()"
-                                >
-                                <input
-                                    required
                                     type="text"
                                     name="code"
                                     placeholder="ZIP Code"
@@ -201,6 +191,16 @@
                                         v-model="state.dataToSend.date.time"
                                     ></v-select>
                                 </div>
+                                <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    id="email"
+                                    v-model="state.dataToSend.email"
+                                    @change="setCache()"
+                                >
                         <!--        <select required>
                                     <option value="" disabled selected>Bathroom</option>
                                     <option value="1 Bathroom">1 Bathroom</option>
@@ -560,16 +560,6 @@
                             <form class="selects_wrapper form2" onsubmit="selectSubmit(event)">
                                 <input
                                     required
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                    id="email"
-                                    v-model="state.dataToSend.email"
-                                    @change="setCache()"
-                                >
-                                <input
-                                    required
                                     type="text"
                                     name="code"
                                     placeholder="ZIP Code"
@@ -600,6 +590,16 @@
                                         v-model="state.dataToSend.date.time"
                                     ></v-select>
                                 </div>
+                                <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    id="email"
+                                    v-model="state.dataToSend.email"
+                                    @change="setCache()"
+                                >
                         <!--        <select required>
                                     <option value="" disabled selected>Bathroom</option>
                                     <option value="1 Bathroom">1 Bathroom</option>
@@ -914,7 +914,7 @@
                             let frequentSale = (100 - this.state.dataToSend.frequent.sale) / 100
 
                             let dependenciesPrice = 0;
-                            this.state.dataToSend.selected.typecleaning.typecleaning_dependencies.forEach(item => {
+                            this.state.selects.typecleaning && this.state.dataToSend.selected.typecleaning.typecleaning_dependencies.forEach(item => {
                                 dependenciesPrice += +item.price * (this.state.dataToSend.selected.premises[item.label].index + 1)
                             })
 
