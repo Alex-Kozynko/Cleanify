@@ -213,7 +213,7 @@
                                     <option value="Standard">Standard</option>
                                     <option value="Deep Cleaning">Deep Clean</option>
                                 </select>-->
-                                <button type="submit" class="button">Get Quote</button>
+                                <button type="submit" class="button">Book from ${{subtotal}}</button>
                             </form>
                         </div>
                     </div>
@@ -612,7 +612,7 @@
                                     <option value="Standard">Standard</option>
                                     <option value="Deep Cleaning">Deep Clean</option>
                                 </select>-->
-                                <button type="submit" class="button">Get Quote</button>
+                                <button type="submit" class="button">Book from ${{subtotal}}</button>
                             </form>
                         </div>
                     </div>
@@ -907,6 +907,20 @@
                                 email: ''
                             }
                         }
+                    },
+                    computed: {
+                        subtotal() {
+                            let timeSale = this.state.dataToSend.date.time.sale ? this.state.dataToSend.date.time.sale : 0
+                            let frequentSale = (100 - this.state.dataToSend.frequent.sale) / 100
+
+                            let dependenciesPrice = 0;
+                            this.state.dataToSend.selected.typecleaning.typecleaning_dependencies.forEach(item => {
+                                dependenciesPrice += +item.price * (this.state.dataToSend.selected.premises[item.label].index + 1)
+                            })
+
+
+                            return +this.state.dataToSend.selected.typecleaning.price + dependenciesPrice;
+                        },
                     },
                     methods: {
                         setCache() {
