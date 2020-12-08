@@ -70,12 +70,14 @@ $(".read_more").click(function (e) {
 });
 
 function headerPOsition() {
-    /*let elem = $('.covid');
-    if ($("html").scrollTop() > elem.outerHeight()) {
-        $('#header').addClass("offset");
-    } else {
-        $('#header').removeClass("offset");
-    }*/
+    if (window.innerWidth < 1023) {
+        let elem = $('.covid');
+        if ($("html").scrollTop() > elem.outerHeight()) {
+            $('#header').addClass("offset");
+        } else {
+            $('#header').removeClass("offset");
+        }
+    }
 }
 
 $(window).on('scroll', () => {
