@@ -166,7 +166,7 @@
                                     id="code"
                                     v-model="state.dataToSend.zip"
                                     @change="setCache()"
-                                    maxlength="6"
+                                    maxlength="5"
                                 >
                                 <div class="selects-holder">
                                     <v-select
@@ -212,7 +212,7 @@
                                     <option value="Standard">Standard</option>
                                     <option value="Deep Cleaning">Deep Clean</option>
                                 </select>-->
-                                <button type="submit" class="button">Book from ${{subtotal}}</button>
+                                <button type="submit" class="button" :disabled="state.dataToSend.date.time.hidden">Book from ${{subtotal}}</button>
                             </form>
                         </div>
                     </div>
@@ -565,7 +565,7 @@
                                     id="code"
                                     v-model="state.dataToSend.zip"
                                     @change="setCache()"
-                                    maxlength="6"
+                                    maxlength="5"
                                 >
                                 <div class="selects-holder">
                                     <v-select
@@ -611,7 +611,7 @@
                                     <option value="Standard">Standard</option>
                                     <option value="Deep Cleaning">Deep Clean</option>
                                 </select>-->
-                                <button type="submit" class="button">Book from ${{subtotal}}</button>
+                                <button type="submit" class="button" :disabled="state.dataToSend.date.time.hidden">Book from ${{subtotal}}</button>
                             </form>
                         </div>
                     </div>
@@ -894,7 +894,7 @@
                                     month: moment().add(1, 'days').format('MM'),
                                     year: moment().add(1, 'days').format('YYYY'),
                                     time: {
-                                        text: "Please select time",
+                                        text: "Time",
                                         sale: 0,
                                         hidden: true
                                     }
@@ -1021,7 +1021,7 @@
                 }
                 function selectSubmit(e) {
                     e.preventDefault()
-                    document.location.href = "/calc/";
+                    document.location.href = "/recurring-cleaning/";
                 }
                 function setCache(e) {
                     console.log(e);
