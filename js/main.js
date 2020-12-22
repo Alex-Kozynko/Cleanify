@@ -1,4 +1,4 @@
-$('.slider').slick({
+/*$('.slider').slick({
     arrows: true,
     autoplay: true,
     autoplaySpeed: 5000,
@@ -11,7 +11,7 @@ $('.slider').slick({
            }
         }
     ]
-});
+});*/
 
 
 $(window).on('load resize', function() {
